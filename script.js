@@ -4,7 +4,7 @@
    ⬇⬇  هذا هو السطر الوحيد اللي تعدّله  ⬇⬇
    حُط رابط سكربت جوجل (ينتهي بـ /exec) بين علامتي الاقتباس.
    ============================================================ */
-const ENDPOINT = "https://script.google.com/macros/s/AKfycbzVQhSlzz_LcaULTqfIlQdbNFr5WJOmkgK240BKQzw8stQTOvu5TJafg0MhwvorgO2A/exec?gid=0";
+const ENDPOINT = "https://script.google.com/macros/s/AKfycbyfaseH6boEfxT6u9uVw0FpszphEYUwxTxpUjPYQXXT_eiGKUob1YVsQikaC0vgMNz3/exec";
 /* ============================================================ */
 
 const $ = (s, p = document) => p.querySelector(s);
