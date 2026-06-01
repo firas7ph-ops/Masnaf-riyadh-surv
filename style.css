@@ -1,0 +1,383 @@
+/* ===== خط مصنف — Lyon Arabic Display (مرفق في assets/) ===== */
+@font-face{
+  font-family:"Lyon Arabic Display";
+  src:url("assets/lyon-display-light.otf") format("opentype");
+  font-weight:300; font-style:normal; font-display:swap;
+}
+@font-face{
+  font-family:"Lyon Arabic Display";
+  src:url("assets/lyon-display-regular.otf") format("opentype");
+  font-weight:400; font-style:normal; font-display:swap;
+}
+@font-face{
+  font-family:"Lyon Arabic Display";
+  src:url("assets/lyon-display-bold.otf") format("opentype");
+  font-weight:700; font-style:normal; font-display:swap;
+}
+
+/* ============================================================
+   مصنف — استبيان آراء العملاء (style.css)
+   ============================================================ */
+
+:root{
+  --bg:        #0A0A0A;
+  --bg-2:      #111110;
+  --surface:   rgba(245,241,234,0.025);
+  --surface-2: rgba(245,241,234,0.05);
+  --cream:     #F5F1EA;
+  --cream-dim: rgba(245,241,234,0.62);
+  --cream-faint: rgba(245,241,234,0.40);
+  --gold:      #C9A878;
+  --gold-deep: #B8956A;
+  --gold-line: rgba(201,168,120,0.22);
+  --gold-glow: rgba(201,168,120,0.10);
+  --error:     #DBA08C;
+
+  --r:         14px;
+  --maxw:      560px;
+
+  --font-display: "Lyon Arabic Display", "Noto Naskh Arabic", system-ui, serif;
+  --font-body:    "Lyon Arabic Display", "Noto Naskh Arabic", system-ui, serif;
+}
+
+*,*::before,*::after{ box-sizing:border-box; margin:0; padding:0; }
+
+html{ -webkit-text-size-adjust:100%; }
+
+body{
+  font-family:var(--font-body);
+  background:var(--bg);
+  color:var(--cream);
+  line-height:1.7;
+  min-height:100vh;
+  -webkit-font-smoothing:antialiased;
+  text-rendering:optimizeLegibility;
+  overflow-x:hidden;
+  position:relative;
+}
+
+/* وهج ذهبي خفيف جدًا في الأعلى */
+body::before{
+  content:"";
+  position:fixed;
+  inset:0 0 auto 0;
+  height:60vh;
+  background:radial-gradient(120% 80% at 50% -10%, var(--gold-glow), transparent 60%);
+  pointer-events:none;
+  z-index:0;
+}
+
+.wrap{
+  position:relative;
+  z-index:1;
+  max-width:var(--maxw);
+  margin:0 auto;
+  padding:clamp(40px,9vw,72px) clamp(20px,6vw,40px) 64px;
+}
+
+/* ============================================================
+   الهيدر / الشعار
+   ============================================================ */
+.brand{
+  text-align:center;
+  margin-bottom:clamp(36px,8vw,52px);
+}
+.brand__logo{
+  font-family:var(--font-display);
+  font-weight:700;
+  font-size:clamp(34px,9vw,46px);
+  letter-spacing:.02em;
+  color:var(--cream);
+  display:inline-block;
+  line-height:1;
+}
+.brand__logo-img{
+  width:clamp(88px,23vw,115px);
+  height:auto;
+  display:inline-block;
+}
+.brand__rule{
+  width:38px;
+  height:2px;
+  background:var(--gold);
+  margin:18px auto 0;
+  border:none;
+  opacity:.9;
+}
+
+/* ============================================================
+   العنوان
+   ============================================================ */
+.intro{ text-align:center; margin-bottom:clamp(44px,10vw,64px); }
+.intro__title{
+  font-family:var(--font-display);
+  font-weight:700;
+  font-size:clamp(30px,8.5vw,44px);
+  line-height:1.25;
+  letter-spacing:.005em;
+  margin-bottom:14px;
+}
+.intro__sub{
+  font-size:clamp(15px,4vw,17px);
+  font-weight:300;
+  color:var(--cream-dim);
+  max-width:30ch;
+  margin:0 auto;
+}
+
+/* ============================================================
+   كتلة السؤال
+   ============================================================ */
+.q{ margin-bottom:clamp(40px,9vw,56px); border:none; padding:0; min-inline-size:0; }
+legend{ padding:0; }
+.q__index{
+  font-family:var(--font-display);
+  font-size:13px;
+  font-weight:700;
+  color:var(--gold);
+  letter-spacing:.14em;
+  margin-bottom:10px;
+  display:block;
+}
+.q__title{
+  font-family:var(--font-display);
+  font-weight:700;
+  font-size:clamp(20px,5.5vw,24px);
+  line-height:1.45;
+  margin-bottom:22px;
+}
+.q__title .opt-tag{
+  font-family:var(--font-body);
+  font-size:13px;
+  font-weight:400;
+  color:var(--cream-faint);
+}
+
+/* ============================================================
+   السؤال 1 — خيارات (راديو)
+   ============================================================ */
+.options{ display:flex; flex-direction:column; gap:10px; }
+.opt{
+  position:relative;
+  display:flex;
+  align-items:center;
+  gap:14px;
+  padding:15px 18px;
+  border:1px solid var(--gold-line);
+  border-radius:var(--r);
+  background:var(--surface);
+  cursor:pointer;
+  transition:border-color .22s ease, background .22s ease, transform .12s ease;
+  user-select:none;
+}
+.opt:hover{ border-color:rgba(201,168,120,0.5); background:var(--surface-2); }
+.opt:active{ transform:scale(.992); }
+.opt input{ position:absolute; opacity:0; pointer-events:none; }
+.opt__dot{
+  flex:0 0 auto;
+  width:20px; height:20px;
+  border-radius:50%;
+  border:1.5px solid var(--cream-faint);
+  display:grid; place-items:center;
+  transition:border-color .22s ease;
+}
+.opt__dot::after{
+  content:"";
+  width:10px; height:10px;
+  border-radius:50%;
+  background:var(--gold);
+  transform:scale(0);
+  transition:transform .2s cubic-bezier(.34,1.56,.64,1);
+}
+.opt__label{ font-size:clamp(15px,4vw,16.5px); font-weight:400; }
+.opt input:checked ~ .opt__dot{ border-color:var(--gold); }
+.opt input:checked ~ .opt__dot::after{ transform:scale(1); }
+.opt:has(input:checked){
+  border-color:var(--gold);
+  background:rgba(201,168,120,0.07);
+}
+.opt input:focus-visible ~ .opt__dot{ box-shadow:0 0 0 3px var(--gold-glow); }
+
+/* حقل "غير ذلك" */
+.other-field{
+  max-height:0; opacity:0; overflow:hidden;
+  transition:max-height .35s ease, opacity .3s ease, margin .35s ease;
+  margin-top:0;
+}
+.other-field.show{ max-height:90px; opacity:1; margin-top:10px; }
+.other-field input{
+  width:100%;
+  padding:14px 18px;
+  background:var(--surface);
+  border:1px solid var(--gold-line);
+  border-radius:var(--r);
+  color:var(--cream);
+  font-family:var(--font-body);
+  font-size:16px;
+}
+.other-field input::placeholder{ color:var(--cream-faint); }
+.other-field input:focus{ outline:none; border-color:var(--gold); }
+
+/* ============================================================
+   السؤال 2 — مقياس 1 إلى 10
+   ============================================================ */
+.scale__labels{
+  direction:ltr;
+  display:flex;
+  justify-content:space-between;
+  font-size:12.5px;
+  color:var(--cream-dim);
+  margin-bottom:12px;
+  padding:0 2px;
+}
+.scale__labels span{ display:flex; align-items:center; gap:6px; }
+.scale__labels .dot{ width:6px;height:6px;border-radius:50%; }
+.scale__labels .dot.low{ background:var(--cream-faint); }
+.scale__labels .dot.high{ background:var(--gold); }
+.scale{
+  direction:ltr;          /* 1 يسار و 10 يمين */
+  display:flex;
+  gap:clamp(5px,1.6vw,9px);
+}
+.scale__btn{
+  flex:1 1 0;
+  aspect-ratio:1/1;
+  min-width:0;
+  border:1px solid var(--gold-line);
+  border-radius:12px;
+  background:var(--surface);
+  color:var(--cream-dim);
+  font-family:var(--font-display);
+  font-weight:700;
+  font-size:clamp(14px,3.6vw,17px);
+  cursor:pointer;
+  display:grid; place-items:center;
+  transition:all .18s ease;
+  position:relative;
+}
+.scale__btn input{ position:absolute; opacity:0; inset:0; cursor:pointer; }
+.scale__btn:hover{ border-color:rgba(201,168,120,0.6); color:var(--cream); }
+.scale__btn.is-selected{
+  background:var(--gold);
+  border-color:var(--gold);
+  color:#0A0A0A;
+  transform:translateY(-3px);
+  box-shadow:0 6px 18px -6px rgba(201,168,120,0.5);
+}
+
+/* ============================================================
+   السؤال 3 — نص حر
+   ============================================================ */
+textarea{
+  width:100%;
+  min-height:120px;
+  resize:vertical;
+  padding:16px 18px;
+  background:var(--surface);
+  border:1px solid var(--gold-line);
+  border-radius:var(--r);
+  color:var(--cream);
+  font-family:var(--font-body);
+  font-size:16px;
+  line-height:1.7;
+}
+textarea::placeholder{ color:var(--cream-faint); }
+textarea:focus{ outline:none; border-color:var(--gold); }
+
+/* ============================================================
+   الأخطاء + زر الإرسال
+   ============================================================ */
+.q__error{
+  color:var(--error);
+  font-size:13.5px;
+  margin-top:12px;
+  display:none;
+}
+.q.has-error .q__error{ display:block; }
+.q.has-error .opt, .q.has-error .scale__btn{ border-color:rgba(219,160,140,0.45); }
+.q.shake{ animation:shake .4s ease; }
+@keyframes shake{
+  0%,100%{transform:translateX(0)}
+  20%,60%{transform:translateX(-5px)}
+  40%,80%{transform:translateX(5px)}
+}
+
+.submit{
+  width:100%;
+  padding:18px;
+  margin-top:8px;
+  background:transparent;
+  color:var(--cream);
+  border:1.5px solid var(--gold);
+  border-radius:var(--r);
+  font-family:var(--font-display);
+  font-weight:700;
+  font-size:18px;
+  letter-spacing:.02em;
+  cursor:pointer;
+  transition:background .28s ease, color .28s ease, box-shadow .28s ease;
+}
+.submit:hover{
+  background:var(--gold);
+  color:#0A0A0A;
+  box-shadow:0 10px 30px -10px rgba(201,168,120,0.55);
+}
+.submit:disabled{ opacity:.55; cursor:wait; }
+
+.form-note{
+  text-align:center;
+  font-size:13px;
+  color:var(--error);
+  margin-top:16px;
+  display:none;
+}
+.form-note.show{ display:block; }
+
+/* ============================================================
+   شاشة الشكر
+   ============================================================ */
+.thanks{
+  display:none;
+  text-align:center;
+  padding:clamp(60px,16vw,110px) 0;
+  animation:rise .7s cubic-bezier(.2,.8,.2,1) both;
+}
+.thanks.show{ display:block; }
+.thanks__mark{
+  width:56px;height:56px;border-radius:50%;
+  border:1.5px solid var(--gold);
+  display:grid;place-items:center;
+  margin:0 auto 26px;
+  color:var(--gold);
+}
+.thanks__mark svg{ width:26px;height:26px; }
+.thanks__title{
+  font-family:var(--font-display);
+  font-weight:700;
+  font-size:clamp(26px,7vw,34px);
+  margin-bottom:14px;
+}
+.thanks__text{ color:var(--cream-dim); font-size:16px; font-weight:300; }
+.thanks__rule{ width:46px;height:2px;background:var(--gold);border:none;margin:30px auto 0; }
+
+/* تذييل */
+.footer{
+  text-align:center;
+  margin-top:48px;
+  font-size:12px;
+  color:var(--cream-faint);
+  letter-spacing:.04em;
+}
+
+/* ============================================================
+   حركة الظهور عند التحميل
+   ============================================================ */
+.reveal{ opacity:0; transform:translateY(18px); animation:rise .7s cubic-bezier(.2,.8,.2,1) forwards; }
+@keyframes rise{ to{ opacity:1; transform:none; } }
+.d1{animation-delay:.05s}.d2{animation-delay:.15s}.d3{animation-delay:.28s}
+.d4{animation-delay:.40s}.d5{animation-delay:.52s}.d6{animation-delay:.64s}
+
+@media (prefers-reduced-motion:reduce){
+  .reveal,.thanks{ animation:none; opacity:1; transform:none; }
+  .scale__btn,.opt,.submit{ transition:none; }
+}

@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>مصنف · رأيك يصنع الفرق</title>
+<meta name="description" content="استبيان تقييم تجربتك في مصنف — دقيقة من وقتك تصنع الفرق." />
+
+<!-- التصميم: style.css   /   السلوك: script.js   /   ربط جوجل: Code.gs -->
+<link rel="stylesheet" href="style.css" />
+<script defer src="script.js"></script>
+</head>
+<body>
+<main class="wrap">
+
+  <!-- ===== الشعار ===== -->
+  <header class="brand reveal d1">
+    <!-- ضع ملف شعار مصنف بخلفية شفافة باسم logo.png داخل assets/.
+         لو ما وُجد الملف، يظهر اسم "مصنف" نصًّا بخط Lyon بدلًا منه. -->
+    <img src="assets/logo.png" alt="مصنف" class="brand__logo-img"
+         onerror="this.style.display='none';document.getElementById('logoText').style.display='inline-block';" />
+    <span class="brand__logo" id="logoText" style="display:none">مصنف</span>
+    <hr class="brand__rule" />
+  </header>
+
+  <!-- ===== العنوان ===== -->
+  <section class="intro reveal d2">
+    <h1 class="intro__title">رأيك يصنع الفرق</h1>
+    <p class="intro__sub">دقيقة من وقتك تساعدنا نقدّم لك تجربة أفضل في المرة الجاية</p>
+  </section>
+
+  <!-- ===== الفورم ===== -->
+  <form id="survey" novalidate>
+
+    <!-- السؤال 1 -->
+    <fieldset class="q reveal d3" id="q1">
+      <legend class="q__index">السؤال الأول</legend>
+      <p class="q__title">كيف عرفت عن مصنف؟</p>
+      <div class="options">
+        <label class="opt"><input type="radio" name="source" value="إنستقرام"><span class="opt__dot"></span><span class="opt__label">إنستقرام</span></label>
+        <label class="opt"><input type="radio" name="source" value="تيك توك"><span class="opt__dot"></span><span class="opt__label">تيك توك</span></label>
+        <label class="opt"><input type="radio" name="source" value="سناب شات"><span class="opt__dot"></span><span class="opt__label">سناب شات</span></label>
+        <label class="opt"><input type="radio" name="source" value="إعلان أو ترشيح من مؤثر"><span class="opt__dot"></span><span class="opt__label">إعلان أو ترشيح من مؤثر</span></label>
+        <label class="opt"><input type="radio" name="source" value="ترشيح من صديق أو أحد أفراد العائلة"><span class="opt__dot"></span><span class="opt__label">ترشيح من صديق أو أحد أفراد العائلة</span></label>
+        <label class="opt"><input type="radio" name="source" value="مررت بالمطعم / شفته من برّا"><span class="opt__dot"></span><span class="opt__label">مررت بالمطعم / شفته من برّا</span></label>
+        <label class="opt"><input type="radio" name="source" value="قوقل ماب / خرايط"><span class="opt__dot"></span><span class="opt__label">قوقل ماب / خرايط</span></label>
+        <label class="opt"><input type="radio" name="source" value="غير ذلك" id="srcOther"><span class="opt__dot"></span><span class="opt__label">غير ذلك</span></label>
+      </div>
+      <div class="other-field" id="otherWrap">
+        <input type="text" id="otherText" placeholder="اكتب لنا كيف عرفت عنّا..." maxlength="120" />
+      </div>
+      <p class="q__error">الرجاء اختيار إجابة لهذا السؤال.</p>
+    </fieldset>
+
+    <!-- السؤال 2 -->
+    <fieldset class="q reveal d4" id="q2">
+      <legend class="q__index">السؤال الثاني</legend>
+      <p class="q__title">كيف تقيّم تجربتك اليوم في مصنف؟</p>
+      <div class="scale__labels">
+        <span><span class="dot low"></span> محتاج تحسين</span>
+        <span>ممتاز <span class="dot high"></span></span>
+      </div>
+      <div class="scale" id="scale"></div>
+      <p class="q__error">الرجاء اختيار تقييم من ١ إلى ١٠.</p>
+    </fieldset>
+
+    <!-- السؤال 3 -->
+    <fieldset class="q reveal d5" id="q3">
+      <legend class="q__index">السؤال الثالث</legend>
+      <p class="q__title">ليش أعطيتنا هذا التقييم؟ <span class="opt-tag">(اختياري)</span></p>
+      <textarea id="comment" name="comment" placeholder="شاركنا تفاصيل تجربتك..." maxlength="1000"></textarea>
+    </fieldset>
+
+    <button type="submit" class="submit reveal d6" id="submitBtn">إرسال</button>
+    <p class="form-note" id="formNote">صار خطأ في الإرسال، جرّب مرة ثانية.</p>
+  </form>
+
+  <!-- ===== الشكر ===== -->
+  <section class="thanks" id="thanks" aria-live="polite">
+    <div class="thanks__mark">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg>
+    </div>
+    <h2 class="thanks__title">شكراً لك</h2>
+    <p class="thanks__text">رأيك وصل، وراح نشتغل عليه.</p>
+    <hr class="thanks__rule" />
+  </section>
+
+  <p class="footer">مصنف · جازان</p>
+</main>
+</body>
+</html>
